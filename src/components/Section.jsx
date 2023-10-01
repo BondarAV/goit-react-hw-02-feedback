@@ -6,7 +6,7 @@ export class Section extends Component {
 
     return (
       <div className="section">
-        <p className="section-title">{title}</p>
+        <p className="title">{title}</p>
 
         {children}
       </div>

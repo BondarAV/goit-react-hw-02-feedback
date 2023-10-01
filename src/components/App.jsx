@@ -40,9 +40,7 @@ export class App extends Component {
 
     if (this.countTotalFeedback() !== 0) {
       stats = (
-        <Section title="Please leave feedback">
-          <Statistics good={this.state.good} neutral={this.state.neutral} bad={this.state.bad} total={this.countTotalFeedback()} positivePercentage={this.countPositiveFeedbackPercentage()} />
-        </Section>
+        <Statistics good={this.state.good} neutral={this.state.neutral} bad={this.state.bad} total={this.countTotalFeedback()} positivePercentage={this.countPositiveFeedbackPercentage()} />
       );
     }
 
@@ -52,7 +50,10 @@ export class App extends Component {
           <FeedbackOptions options={['good', 'neutral', 'bad']} onLeaveFeedback={this.handleFeedback} />
         </Section>
 
-        {stats}
+
+        <Section title="Statistics">
+          {stats}
+        </Section>
       </div>
     );
   }

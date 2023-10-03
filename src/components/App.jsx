@@ -1,15 +1,15 @@
-import { Component } from "react"
+import { Component } from 'react';
 
-import { FeedbackOptions } from "./FeedbackOptions";
-import { Statistics } from "./Statistics";
-import { Section } from "./Section";
+import { FeedbackOptions } from './FeedbackOptions';
+import { Statistics } from './Statistics';
+import { Section } from './Section';
 
 export class App extends Component {
   state = {
     good: 0,
     neutral: 0,
-    bad: 0
-  }
+    bad: 0,
+  };
 
   countTotalFeedback() {
     return Object.values(this.state).reduce((total, el) => {
@@ -18,8 +18,8 @@ export class App extends Component {
   }
 
   countPositiveFeedbackPercentage() {
-    const percentage = this.state.good / this.countTotalFeedback() * 100;
-    
+    const percentage = (this.state.good / this.countTotalFeedback()) * 100;
+
     if (this.state.good === 0) {
       return 0;
     } else {
@@ -34,27 +34,31 @@ export class App extends Component {
   };
 
   render() {
-    let stats = (
-      <p className="title">There's no feedback yet</p>
-    );
-
-    if (this.countTotalFeedback() !== 0) {
-      stats = (
-        <Statistics good={this.state.good} neutral={this.state.neutral} bad={this.state.bad} total={this.countTotalFeedback()} positivePercentage={this.countPositiveFeedbackPercentage()} />
-      );
-    }
+    const totalFeedback = this.countTotalFeedback();
 
     return (
       <div className="feedback-app">
         <Section title="Please leave feedback">
-          <FeedbackOptions options={['good', 'neutral', 'bad']} onLeaveFeedback={this.handleFeedback} />
+          <FeedbackOptions
+            options={this.state}
+            onLeaveFeedback={this.handleFeedback}
+          />
         </Section>
 
-
         <Section title="Statistics">
-          {stats}
+          {totalFeedback !== 0 ? (
+            <Statistics
+              good={this.state.good}
+              neutral={this.state.neutral}
+              bad={this.state.bad}
+              total={totalFeedback}
+              positivePercentage={this.countPositiveFeedbackPercentage()}
+            />
+          ) : (
+            <p className="title">There's no feedback yet</p>
+          )}
         </Section>
       </div>
     );
   }
-};
+}

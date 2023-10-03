@@ -1,15 +1,9 @@
-import { Component } from "react";
+export const Section = ({ title, children }) => {
+  return (
+    <div className="section">
+      <p className="title">{title}</p>
 
-export class Section extends Component {
-  render() {
-    const { title, children } = this.props;
-
-    return (
-      <div className="section">
-        <p className="title">{title}</p>
-
-        {children}
-      </div>
-    );
-  }
-}
+      {children}
+    </div>
+  );
+};
